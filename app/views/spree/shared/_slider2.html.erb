@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SlideShow</title>
+	<style>
+		*{box-sizing: border-box;}
+		body{margin: 0px;}
+		.foto{ display:none;}
+		img{vertical-align: middle;}
+		#contenedor{
+			max-width: 1000px;
+			position: relative;
+			}
+		.antes, .despues{
+			cursor: pointer;
+			position: absolute;
+			top:50%;
+			width: auto;
+			padding: 1em;
+			margin-top: -22px;
+			color:white;
+			font-weight: bold;
+			font-size: 18px;
+			transition: 1s ease;
+			border-radius: 0 3px 3px 0;
+		}
+		.despues{
+			right:0;
+			border-radius: 3px 0 0 3px;
+		}
+		.antes:hover, .despues:hover{
+			background-color: gray;
+		}
+		.texto{
+			color: white;
+			font-size: 1em;
+			padding: 8px 12px;
+			position: absolute;
+			bottom: 8px;
+			width: 100%;
+			text-align: center;
+		}
+		.numero{
+			color:white;
+			font-size: 1em;
+			padding: 8px 12px;
+			position: absolute;
+			top:0;
+		}
+		.bolita{
+			cursor: pointer;
+			height: 15px;
+			width: 15px;
+			margin-top: 0 2px;
+			background-color: #bbb;
+			border-radius: 50%;
+			display: inline-block;
+			transition: background-color 1s ease;
+		}
+		#bolitas{ text-align: center; }
+		.activo, .bolita:hover{
+			background-color: #717171;
+		}
+		.fade{
+			-webkit-animation-name: fade;
+			-webkit-animation-duration: 1s;
+			animation-name: fade;
+			animation-duration: 1s;
+		}
+
+		@-webkit-keyframes fade{
+			from{
+				opacity: .4;
+			}
+			to{
+				opacity: 1;
+			}
+		}
+		@keyframes fade{
+			from{
+				opacity: .4;
+			}
+			to{
+				opacity: 1;
+			}
+				}
+		
+		@media only screen and (max-width: 400px){
+			.antes, .despues, .texto, .numero{ font-size: 10px; }
+			.bolita{display:none;}
+		}
+	</style>
+	<script>
+		var index = 1;
+		window.onload = function(){
+			muestraFoto(index);
+		}
+		function mueve(n){
+			muestraFoto(index += n);
+		}
+		function foto(n){
+			muestraFoto(index = n);
+		}
+		function muestraFoto(n){
+			var i;
+			var fotos = document.getElementsByClassName("foto");
+			var bolitas = document.getElementsByClassName("bolita");
+			console.log(bolitas.length);
+			if( n > fotos.length) index = 1;
+			if( n < 1) index = fotos.length;
+			for (var i = 0; i < fotos.length; i++) {
+				fotos[i].style.display = "none";
+			}
+			for (var i = 0; i < bolitas.length; i++) {
+				bolitas[i].className = bolitas[i].className.replace("activo","");
+			}
+			fotos[index-1].style.display = "block";
+			bolitas[index-1].className += " activo";
+		}
+	</script>
+</head>
+<body>
+	<div id="contenedor">
+		<div class="foto fade">
+			<img onclick="mueve(1)" src="http://tienda.viozoex.com/image/cache/catalog/slider%205%20activa%20tu%20voluntad-1903x500.jpg" width="100%">
+				
+		</div>
+
+		<div class="foto fade">
+			<img onclick="mueve(1)" src="https://www.ms-pos.net/wp-content/uploads/2017/12/slider_dynamics_eng-1903x500.jpg" width="100%">
+				
+		</div>
+
+		<div class="foto fade">
+			<img onclick="mueve(1)" src="http://constantinnauticskw.com/image/cache/data/slide7-1903x500.jpg" width="100%">		
+		</div>
+
+	</div>
+
+	<div id="bolitas">
+		<span class="bolita" onclick="foto(1)"></span>
+		<span class="bolita" onclick="foto(2)"></span>
+		<span class="bolita" onclick="foto(3)"></span>
+	</div>
+
+
+</body>
+</html>
