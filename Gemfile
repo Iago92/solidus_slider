@@ -67,3 +67,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'deface', '~> 1.0', '>= 1.0.2'
 gem 'solidus'
 gem 'solidus_auth_devise'
+
